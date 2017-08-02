@@ -13,6 +13,7 @@ public class Review {
     private String reviewergender;
     private String revieweroccupation;
     private double movierating;
+    private String message;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
@@ -21,12 +22,13 @@ public class Review {
     public Review() {
     }
 
-    public Review(String reviewername, int reviewerage, String reviewergender, String revieweroccupation, double movierating, Movie movie) {
+    public Review(String reviewername, int reviewerage, String reviewergender, String revieweroccupation, double movierating, String message, Movie movie) {
         this.reviewername = reviewername;
         this.reviewerage = reviewerage;
         this.reviewergender = reviewergender;
         this.revieweroccupation = revieweroccupation;
         this.movierating = movierating;
+        this.message = message;
         this.movie = movie;
     }
 
@@ -78,6 +80,14 @@ public class Review {
         this.movierating = movierating;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Movie getMovie() {
         return movie;
     }
@@ -85,4 +95,6 @@ public class Review {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
+
+
 }

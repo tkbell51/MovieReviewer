@@ -2,56 +2,58 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
-
+    <span th:include="includes :: css"></span>
     <title>Title</title>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-inverse">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/movie">Movie Review</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                        Add new movie
-                    </button>
-                </li>
-            </ul>
-        </div>
-
+<div class="container">
+    <div class="navbar-header ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/movie">Movie Review</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Add new movie
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
 
     </nav>
 </header>
-<div class="container">
-    <div class="jumbotron">
-        <h1>Movie Review</h1>
-        <p>Movies...that's all we talk about here</p>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Add new movie
-        </button>
-    </div>
+<main>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Movie Review</h1>
+            <p>Movies...that's all we talk about here</p>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Add new movie
+            </button>
+        </div>
 
         <div class="row">
 
             <div class="col-md-3" th:each="movie : ${movie}">
                 <div class="thumbnail">
-                    <!--Opens a new window-->
+
                     <a th:href="'/movie/' + @{${movie.id}}" ><img th:src="${movie.imgurl}" alt="${movie.title}"/></a>
                     <div class="caption">
-                        <a th:href="'/movie/' + @{${movie.id}}" ><h1 th:text="${movie.title}"></h1></a>
+                        <a th:href="'/movie/' + @{${movie.id}}" ><h3 th:text="${movie.title}"></h3></a>
                         <p th:text="${movie.releasedate}"></p>
+                        <hr/>
                         <button class="btn btn-default">
+                            <!--Opens a new window-->
                             <a th:href="@{${movie.linkimdb}}" target="_blank">IMDb</a>
                         </button>
                         <button class="pull-right btn btn-primary" type="button">
@@ -65,87 +67,16 @@
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add New Movie</h4>
-                </div>
-                <div class="modal-body">
-                    <!--Form for new movie-->
-                    <form action="/createMovie" method="post">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="genre">Genre</label>
-                            <br/>
-                            <small>Select more than one genre by holding control on PC or command on Mac while selecting different genres.</small>
-                            <select multiple="multiple" class="form-control" id="genre" name="genre">
-                                <option value="Action">Action</option>
-                                <option value="Adventure">Adventure</option>
-                                <option value="Animation">Animation</option>
-                                <option value="Biography">Biography</option>
-                                <option value="Comedy">Comedy</option>
-                                <option value="Crime">Crime</option>
-                                <option value="Documentary">Documentary</option>
-                                <option value="Drama">Drama</option>
-                                <option value="Family">Family</option>
-                                <option value="Fantasy">Fantasy</option>
-                                <option value="Film-Noir">Film-Noir</option>
-                                <option value="History">History</option>
-                                <option value="Horror">Horror</option>
-                                <option value="Music">Music</option>
-                                <option value="Musical">Musical</option>
-                                <option value="Mystery">Mystery</option>
-                                <option value="Romance">Romance</option>
-                                <option value="Sci-Fi">Sci-Fi</option>
-                                <option value="Sport">Sport</option>
-                                <option value="Thriller">Thriller</option>
-                                <option value="War">War</option>
-                                <option value="Western">Western</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="linkimdb">IMDb Link</label>
-                            <input type="url" class="form-control" id="linkimdb" name="linkimdb" placeholder="IMDb URL"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="releasedate">Release Date</label>
-                            <input type="date" class="form-control" id="releasedate" name="releasedate" placeholder="Release Date"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="imgurl">Image URL</label>
-                            <input type="url" class="form-control" id="imgurl" name="imgurl" placeholder="Image URL"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add Movie</button>
-                        </div>
-                    </form>
-                </div>
 
-            </div>
-        </div>
+
+    <div th:include="includes :: modalMovie"></div>
+
+
     </div>
+</main>
 
+<span th:include="includes :: js"></span>
 
-
-</div>
-
-
-<script th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
-
-
-<script>
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').focus()
-    })
-</script>
 
 </body>
 </html>

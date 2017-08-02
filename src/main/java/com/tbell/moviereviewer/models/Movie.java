@@ -1,7 +1,6 @@
 package com.tbell.moviereviewer.models;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,17 +11,19 @@ public class Movie {
     private long id;
     private String title;
     private String genre;
+    private String imgurl;
     private String linkimdb;
-    private Date releasedate;
+    private String releasedate;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     public Movie() {}
 
-    public Movie(String title, String genre, String linkimdb, Date releasedate) {
+    public Movie(String title, String genre, String imgurl, String linkimdb, String releasedate) {
         this.title = title;
         this.genre = genre;
+        this.imgurl = imgurl;
         this.linkimdb = linkimdb;
         this.releasedate = releasedate;
     }
@@ -43,6 +44,14 @@ public class Movie {
         this.title = title;
     }
 
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
     public String getGenre() {
         return genre;
     }
@@ -59,11 +68,19 @@ public class Movie {
         this.linkimdb = linkimdb;
     }
 
-    public Date getReleasedate() {
+    public String getReleasedate() {
         return releasedate;
     }
 
-    public void setReleasedate(Date releasedate) {
+    public void setReleasedate(String releasedate) {
         this.releasedate = releasedate;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
