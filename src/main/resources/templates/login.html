@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="includes :: head">
+
+</head>
+<body class="black white-text">
+<main>
+    <div class="container">
+        <h1 class="white-text">Movie Review</h1>
+        <div style="color: red;" th:text="${error}"></div>
+        <form th:action="@{/login}" th:object="${user}" method="post">
+
+            <div class="row">
+                <div class="col">
+                    <input type="text" th:field="*{username}" placeholder="Username"/>
+
+                </div>
+                <div class="col">
+                    <input type="password" th:field="*{password}" placeholder="Password"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="waves-effect waves-light amber btn black-text" type="submit" >Login</button>
+                </div>
+                <div class="col">
+                    <button class="waves-effect waves-light red btn  modal-trigger red" data-target="createUser" type="button" >Sign Up</button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<div th:include="includes :: createUserModal"></div>
+
+<span th:include="includes :: js"></span>
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="includes :: head"></head>
+<body class="black">
+<header th:include="includes :: navbarLogin"></header>
+
+<main>
+<div class="container">
+    <h1 class="amber-text" th:text="${username}"></h1>
+    <table class="amber-text">
+        <thead>
+        <th>Occupation</th>
+        <th>Age</th>
+        <th>Gender</th>
+        </thead>
+        <tbody class="amber-text">
+        <tr>
+            <td th:text="${user.occupation}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.gender}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1 class="amber-text">Comments</h1>
+    <div class="divider"></div>
+    <div class="col m6" th:each="review : ${review}">
+        <div class="card horizontal hoverable">
+            <div class="card-image">
+                <a th:href="'/movie/' + @{${review.movie.id}}" ><img th:src="${review.movie.imgurl}" alt="${review.movie.title}"/></a>
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <h4  ><a class="red-text"  th:href="'/movie/' + @{${review.movie.id}}" th:text="${review.movie.title}"></a></h4>
+                    <q th:text="${review.message}"></q>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <a th:href="'/movie/' + @{${review.movie.id}}" class=" waves-effect waves-light btn red amber-text" >More Info</a>
+
+                        <a class=" waves-effect waves-light btn red amber-text"  th:href="@{${review.movie.linkimdb}}" target="_blank">
+                            <i class="material-icons left">movie</i>
+                            IMDb
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+<div th:include="includes :: footer"></div>
+    <!--<div th:include="includes :: modalMovie"></div>-->
+
+    <!--<div th:include="includes :: editModal"></div>-->
+<span th:include="includes :: js"></span>
+</body>
+</html>
