@@ -4,9 +4,10 @@
 
 </head>
 <body class="black white-text">
+<div th:include="includes :: navbarLogin"></div>
 <main>
     <div class="container">
-        <h1 class="white-text">Movie Review</h1>
+        <h1 class="white-text">Login</h1>
         <div style="color: red;" th:text="${error}"></div>
         <form th:action="@{/login}" th:object="${user}" method="post">
 

@@ -35,10 +35,12 @@ public class MovieController {
         return "index";
     }
     @RequestMapping(value = "/movie/{movieId}", method = RequestMethod.GET)
-    public String movieDetail(@PathVariable("movieId")long movieId, Model model, Principal principal){
+    public String movieDetail(@PathVariable("movieId")long movieId,
+                               Model model, Principal principal){
 //        String username = principal.getName();
 //        User user = userRepo.findByUsername(username);
-//        model.addAttribute("user", user);
+
+
         Movie movie = repo.findOne(movieId);
         Iterable<Review> reviews = reviewRepo.findAllByMovie(movie);
         model.addAttribute("review", reviews);

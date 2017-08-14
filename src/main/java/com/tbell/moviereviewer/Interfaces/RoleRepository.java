@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
 
-    Role findByName(String role_user);
+    Role findByName(String name);
 }

@@ -42,34 +42,15 @@
 
     </nav>
 </header>
-<!--<header th:fragment="navbarLogin">-->
-    <!--<ul id="dropdown1" class="dropdown-content">-->
-    <!--<li><a class="red-text" th:href="'/movie/' + @{${user.username}} + '/reviews/' ">Your Reviews</a></li>-->
-    <!--<li class="divider"></li>-->
-    <!--<li>-->
-    <!--<form th:action="@{/logout}" method="post">-->
-    <!--<input class="btn-flat red-text" type="submit" value="LOGOUT!!!!" />-->
-    <!--</form>-->
-    <!--</li>-->
-    <!--</ul>-->
-
-    <!--<nav class="navbar-wrapper amber">-->
-        <!--<div class="container">-->
-            <!--<a class="brand-logo" href="/movie">Movie Review</a>-->
-
-            <!--<ul id="nav-mobile" class="right hide-on-med-and-down">-->
-                <!--<li>-->
-                    <!--<button class="waves-effect waves-light btn modal-trigger red" data-target="createMovie">Add new movie</button>-->
-                <!--</li>-->
+<header th:fragment="navbarLogin">
+    <nav class="navbar-wrapper amber">
+        <div class="container">
+            <a class="brand-logo" href="/movie">Movie Review</a>
+        </div>
+    </nav>
+</header>
 
 
-                <!--<li><a class="dropdown-button left-align black-text" href="#!" data-activates="dropdown1" th:text="'Signed in as ' + ${user.username}"></a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-
-
-    <!--</nav>-->
-<!--</header>-->
 <!--new user modal-->
 <div th:fragment="createUserModal">
     <div id="createUser" class="modal black-text">
