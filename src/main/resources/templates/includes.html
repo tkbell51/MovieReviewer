@@ -1,61 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title>Java Movie Review</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
-    <link rel="stylesheet" th:href="@{/webjars/materialize/0.98.2/dist/css/materialize.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/materialize/0.100.2/dist/css/materialize.min.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
 </head>
 
-<body>
+<body th:inline="text">
 <header th:fragment="navbar">
-    <!--<ul id="dropdown1" class="dropdown-content">-->
-        <!--<li><a class="red-text" th:href="'/movie/' + @{${user.username}} + '/reviews/' ">Your Reviews</a></li>-->
-        <!--<li class="divider"></li>-->
-        <!--<li>-->
-            <!--<form th:action="@{/logout}" method="post">-->
-                <!--<input class="btn-flat red-text" type="submit" value="LOGOUT!!!!" />-->
-            <!--</form>-->
-        <!--</li>-->
-    <!--</ul>-->
+    <nav class="amber">
+        <div class="navbar-wrapper ">
+                <a sec:authorize="!isAuthenticated()" class="brand-logo center" href="/">Movie Review</a>
+                <a sec:authorize="hasRole('ROLE_USER')" class="brand-logo center" href="/movie/">Movie Review</a>
 
-    <nav class="navbar-wrapper amber">
-        <div class="container">
-                <a class="brand-logo" href="/movie">Movie Review</a>
-
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <button class="waves-effect waves-light btn modal-trigger red" data-target="createMovie">Add new movie</button>
-                    </li>
-
-                    <li>
-                        <form th:action="@{/logout}" method="post">
-                            <input class="btn-flat red-text" type="submit" value="LOGOUT!!!!" />
-                        </form>
-                    </li>
-                    <!--<li><a class="dropdown-button left-align black-text" href="#!" data-activates="dropdown1" th:text="'Signed in as ' + ${user.username}"></a></li>-->
-                </ul>
-            </div>
-
-
-    </nav>
-</header>
-<header th:fragment="navbarLogin">
-    <nav class="navbar-wrapper amber">
-        <div class="container">
-            <a class="brand-logo" href="/movie">Movie Review</a>
         </div>
     </nav>
+
 </header>
+
 
 
 <!--new user modal-->
 <div th:fragment="createUserModal">
     <div id="createUser" class="modal black-text">
         <div class="modal-content">
-            <form th:action="'/login/createUser'" method="post">
+            <form th:action="'/signup'" method="post">
                 <div class="input-field">
                     <input type="text" id="username" name="username" placeholder="Username"/>
                     <label for="username">Username</label>
@@ -90,8 +63,9 @@
     </div>
 </div>
 
+<!--new movie modal-->
 <div th:fragment="modalMovie" >
-    <!-- Modal -->
+
 
     <div id="createMovie" class="modal">
         <div class="modal-content">
@@ -103,33 +77,33 @@
                 <div class="input-field">
 
 
-                        <select multiple="multiple"   name="genre" >
-                            <option value="" disabled="disabled">Can Select Multiple </option>
-                            <option value="Action">Action</option>
-                            <option value="Adventure">Adventure</option>
-                            <option value="Animation">Animation</option>
-                            <option value="Biography">Biography</option>
-                            <option value="Comedy">Comedy</option>
-                            <option value="Crime">Crime</option>
-                            <option value="Documentary">Documentary</option>
-                            <option value="Drama">Drama</option>
-                            <option value="Family">Family</option>
-                            <option value="Fantasy">Fantasy</option>
-                            <option value="Film-Noir">Film-Noir</option>
-                            <option value="History">History</option>
-                            <option value="Horror">Horror</option>
-                            <option value="Music">Music</option>
-                            <option value="Musical">Musical</option>
-                            <option value="Mystery">Mystery</option>
-                            <option value="Romance">Romance</option>
-                            <option value="Sci-Fi">Sci-Fi</option>
-                            <option value="Sport">Sport</option>
-                            <option value="Thriller">Thriller</option>
-                            <option value="War">War</option>
-                            <option value="Western">Western</option>
-                        </select>
+                    <select multiple="multiple"   name="genre" >
+                        <option value="" disabled="disabled">Can Select Multiple Genres</option>
+                        <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Documentary">Documentary</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Family">Family</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Film-Noir">Film-Noir</option>
+                        <option value="History">History</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Music">Music</option>
+                        <option value="Musical">Musical</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="War">War</option>
+                        <option value="Western">Western</option>
+                    </select>
                     <label>Genre</label>
-                    </div>
+                </div>
 
 
                 <div class="input-field">
@@ -138,7 +112,7 @@
                 </div>
                 <div class="input-field">
                     <label for="releasedate">Release Date</label>
-                    <input type="text" class="datepicker" id="releasedate" name="releasedate" placeholder="Release Date"/>
+                    <input type="date" class="datepicker" id="releasedate" name="releasedate" placeholder="Release Date"/>
                 </div>
                 <div class="input-field">
                     <label for="imgurl">Image URL</label>
@@ -146,7 +120,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="waves-effect waves-light btn red amber-text">Submit Edit</button>
+                    <button type="submit" class="waves-effect waves-light btn red amber-text">Create Movie</button>
                 </div>
             </form>
         </div>
@@ -154,6 +128,7 @@
     </div>
 </div>
 
+<!--update movie modal-->
 <div th:fragment="editModal">
 
     <div id="myEditModal" class="modal">
@@ -214,6 +189,53 @@
     </div>
 
 </div>
+
+<!--logout-->
+<div th:fragment="logout">
+
+    <div id="logout" class="modal modal">
+        <div class="modal-content">
+            <p class="center-align">Are you sure you want to leave?</p>
+            <div class="row">
+                <div class="col s6 center-align">
+                    <form th:action="@{/logout}" method="post">
+                        <input class="waves-effect waves-light btn" type="submit" value="Yes"> </input>
+                    </form>
+                </div>
+                <div class="col s6 center-align">
+                    <button class="waves-effect waves-light btn modal-close" type="button" >No</button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--floating nav button-->
+<div th:fragment="addButton">
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large amber">
+            <i class="large material-icons">dehaze</i>
+        </a>
+        <ul sec:authorize="!isAuthenticated()">
+            <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Login to enjoy more features!" href="/login"><i class="material-icons">star</i></a></li>
+
+            <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Top of page" href="#title"><i class="material-icons">keyboard_arrow_up</i></a></li>
+        </ul>
+        <ul sec:authorize="isAuthenticated()">
+            <li><a class="btn-floating red tooltipped modal-trigger" data-target="logout" data-position="left" data-delay="50" data-tooltip="Logout"><i class="material-icons">exit_to_app</i></a></li>
+            <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Top of page" href="#title"><i class="material-icons">keyboard_arrow_up</i></a></li>
+            <li><a class="btn-floating red tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Add new movie" data-target="createMovie"><i class="material-icons">add</i></a></li>
+            <li><a th:href="'/movie/' + @{${user.username}} + '/reviews/' " class="btn-floating orange tooltipped" data-position="left" data-delay="50" data-tooltip="Your Reviews"><i class="material-icons">star</i></a></li>
+            <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Homepage" href="/movie/"><i class="material-icons">home</i></a></li>
+
+        </ul>
+    </div>
+</div>
+
+<!--footer-->
 <div th:fragment="footer">
     <footer class="page-footer red amber-text">
         <div class="footer-copyright">
@@ -224,19 +246,23 @@
 
     </footer>
 </div>
+
+<!--javascript and jQuery-->
 <span th:fragment="js">
 
         <script th:src="@{/webjars/jquery/3.2.1/dist/jquery.min.js}"></script>
 
-    <script th:src="@{/webjars/materialize/0.98.2/dist/js/materialize.min.js}"></script>
+    <script th:src="@{/webjars/materialize/0.100.2/dist/js/materialize.min.js}"></script>
     <script>
         $(document).ready(function(){
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $(".button-collapse").sideNav();
+            $(".dropdown-button").dropdown();
             $('.modal').modal();
-        });
-        $(document).ready(function() {
             $('select').material_select();
+            $('.tooltipped').tooltip({delay: 50});
+            $('.scrollspy').scrollSpy();
         });
+
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year,
@@ -245,6 +271,7 @@
             close: 'Ok',
             closeOnSelect: false // Close upon selecting a date,
         });
+
     </script>
     </span>
 </body>
