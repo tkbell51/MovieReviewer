@@ -31,8 +31,8 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/login/createUser", method = RequestMethod.POST)
-    public String createUser (@RequestParam("username")String username,
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup (@RequestParam("username")String username,
                               @RequestParam("password")String password,
                               @RequestParam("gender")String gender,
                               @RequestParam("age") String age,

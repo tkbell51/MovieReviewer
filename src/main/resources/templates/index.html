@@ -3,44 +3,37 @@
 <head th:include="includes :: head">
 
 </head>
-<body class="black">
+<body class="black" th:inline="text">
 <main>
     <header th:include="includes :: navbar"></header>
 
     <div class="container">
-            <h1 class="white-text">Movie Review</h1>
-            <p class="white-text">Movies...that's all we talk about here</p>
-            <div class="divider"></div>
-            <!-- Button trigger modal -->
+        <h1 id="title" class="white-text scrollspy">Movie Review</h1>
+        <p class="white-text">Movies...that's all we talk about here</p>
+        <div class="divider"></div>
+        <!-- Button trigger modal -->
 
 
         <div class="row">
 
-            <div class="col m6" th:each="movie : ${movie}">
-                <div class="card horizontal hoverable">
+            <div class="col l6 m12 s12" th:each="movie : ${movie}">
+                <div class="card small horizontal hoverable">
                     <div class="card-image">
-                        <a th:href="'/movie/' + @{${movie.id}}" ><img th:src="${movie.imgurl}" alt="${movie.title}"/></a>
+                        <a th:href="'/movie/' + @{${movie.id}} + '/'" ><img th:src="${movie.imgurl}" alt="${movie.title}"/></a>
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
-                            <h4  ><a class="red-text"  th:href="'/movie/' + @{${movie.id}}" th:text="${movie.title}"></a></h4>
-                            <p th:text="${movie.releasedate}"></p>
+                            <h4><a class="red-text"  th:href="'/movie/' + @{${movie.id}}+ '/'" th:text="${movie.title}"></a></h4>
+                            <p>[[${movie.releasedate}]]</p>
+                            <p>[[${movie.genre}]]</p>
                         </div>
                         <div class="card-action">
-                                <div class="row">
-                                    <div class="col m6 s12">
-                                        <a th:href="'/movie/' + @{${movie.id}}" class=" waves-effect waves-light btn red amber-text" >Reviews</a>
+                            <a th:href="'/movie/' + @{${movie.id}}+ '/'" class="cardbtn waves-effect waves-light btn red amber-text" >Reviews</a>
+                            <a class="cardbtn waves-effect waves-light btn red amber-text"  th:href="@{${movie.linkimdb}}" target="_blank">
+                                <i class="material-icons left">movie</i>
 
-                                    </div>
-                                        <div class="col m6 s12">
-                                            <a class=" waves-effect waves-light btn red amber-text"  th:href="@{${movie.linkimdb}}" target="_blank">
-                                                IMDb
-                                            </a>
-                                        </div>
-
-
-
-                                </div>
+                                IMDb
+                            </a>
 
 
                         </div>
@@ -52,8 +45,10 @@
 
     </div>
 </main>
+<div th:include="includes :: logout"></div>
+<div th:include="includes :: addButton"></div>
 <div th:include="includes :: footer"></div>
-    <div th:include="includes :: modalMovie"></div>
+<div th:include="includes :: modalMovie"></div>
 
 
 

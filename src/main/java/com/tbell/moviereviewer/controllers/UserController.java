@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     UserRepository userRepo;
 
-    @RequestMapping("/movie/{username}/reviews")
+    @RequestMapping("/movie/{username}/reviews/")
     public String userDetails(@PathVariable("username")String username,
             Model model, Principal principal){
 

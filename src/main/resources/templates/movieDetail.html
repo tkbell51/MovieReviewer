@@ -3,7 +3,7 @@
 <head th:include="includes :: head">
 
 </head>
-<body class="black">
+<body th:inline="text" class="black">
 <header th:include="includes :: navbar"></header>
 <main >
     <div class="container">
@@ -38,17 +38,18 @@
                 </div>
             </div>
             <div class="col m9">
-                <h1>
+                <h1 id="title">
                     <a class="amber-text" th:href="@{${movie.linkimdb}}" target="_blank" th:text="${movie.title}"></a>
                 </h1>
                 <div class="card">
                     <div class="card-content">
                         <span class="card-title red-text">Add Review</span>
                         <div class="row">
-                            <form th:action="'/movie/' + ${movie.id} + '/createReview'" method="post">
+                            <form th:action="'/movie/' + ${movie.id} + '/createReview/'" method="post">
                                 <div class="row">
                                     <div class="input-field col m5">
-                                        <p class="range-field">Rate: Lowest 0 Highest 5
+
+                                        <p class="rating range-field">Rate: Lowest 0 Highest 5
                                             <input type="range" name="movierating" id="movierating" min="0" max="5" />
                                         </p>
                                     </div>
@@ -56,7 +57,7 @@
                                 <div class="row">
                                     <div class="input-field">
                                         <i class="material-icons prefix">mode_edit</i>
-                                        <textarea id="reviewMessage" class="materialize-textarea" name="message"></textarea>
+                                        <textarea id="reviewMessage" class="materialize-textarea" name="message" data-length="1000"></textarea>
                                         <label for="reviewMessage">Add a review</label>
                                     </div>
                                 </div>
@@ -95,6 +96,10 @@
 
     </div>
 </main>
+<div th:include="includes :: logout"></div>
+
+<div th:include="includes :: addButton"></div>
+
 <div th:include="includes :: footer"></div>
 
 <div th:include="includes :: modalMovie"></div>

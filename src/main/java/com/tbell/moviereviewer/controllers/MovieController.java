@@ -25,20 +25,32 @@ public class MovieController {
     @Autowired
     UserRepository userRepo;
 
-    @RequestMapping("/movie")
-    public String index(Model model, Principal principal){
-//        String username = principal.getName();
-//        User user = userRepo.findByUsername(username);
-//        model.addAttribute("user", user);
+    @RequestMapping("/")
+    public String index(Model model){
+        Iterable<Movie> movies = repo.findAll();
+        model.addAttribute("movie", movies);
+
+
+        return "index";
+    }
+
+    @RequestMapping("/movie/")
+    public String indexSignedIn(Model model, Principal principal){
+        String username = principal.getName();
+        User user = userRepo.findByUsername(username);
+        model.addAttribute("user", user);
+
         Iterable<Movie> movies = repo.findAll();
         model.addAttribute("movie", movies);
         return "index";
     }
-    @RequestMapping(value = "/movie/{movieId}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/movie/{movieId}/", method = RequestMethod.GET)
     public String movieDetail(@PathVariable("movieId")long movieId,
                                Model model, Principal principal){
-//        String username = principal.getName();
-//        User user = userRepo.findByUsername(username);
+        String username = principal.getName();
+        User user = userRepo.findByUsername(username);
+        model.addAttribute("user", user);
 
 
         Movie movie = repo.findOne(movieId);
@@ -47,19 +59,20 @@ public class MovieController {
         model.addAttribute("movie", movie);
         return "movieDetail";
     }
-    @RequestMapping(value = "/movie/createMovie", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/createMovie/", method = RequestMethod.POST)
     public String createMovie(@RequestParam("title")String title,
                               @RequestParam("genre")String genre,
                               @RequestParam("linkimdb")String linkimdb,
                               @RequestParam("releasedate")String releasedate,
                               @RequestParam("imgurl")String imgurl){
-    Movie movie = new Movie( title, genre, imgurl, linkimdb, releasedate);
+        genre = genre.replaceAll("[,.!?;:]", "$0 ").replaceAll("\\s+", " ");
+        Movie movie = new Movie( title, genre, imgurl, linkimdb, releasedate);
     repo.save(movie);
-    return "redirect:/movie";
+    return "redirect:/movie/";
     }
 
 
-    @RequestMapping(value = "/movie/edit/{movieId}/editMovie", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/edit/{movieId}/editMovie/", method = RequestMethod.POST)
     public String editMovie(@PathVariable("movieId") long movieId,
                             @RequestParam("title") String title,
                             @RequestParam("genre") String genre,
@@ -75,6 +88,6 @@ public class MovieController {
         movie.setImgurl(imgurl);
         repo.save(movie);
 
-        return "redirect:/movie/" + movieId;
+        return "redirect:/movie/" + movieId + "/";
     }
 }

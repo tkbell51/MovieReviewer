@@ -32,8 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/movie").permitAll()
+                    .antMatchers("/").permitAll()
                     .antMatchers("/login/**").permitAll()
+                    .antMatchers("/signup/**").permitAll()
                     .antMatchers("/movie/**").hasRole("USER")
                     .and()
                 .formLogin()
@@ -43,12 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .logout()
                     .permitAll()
-                    .logoutSuccessUrl("/login");
+                    .logoutSuccessUrl("/");
 
     }
 
     private AuthenticationSuccessHandler loginSuccessHandler() {
-        return (request, response, authentication) -> response.sendRedirect("/movie");
+        return (request, response, authentication) -> response.sendRedirect("/movie/");
     }
 
     private AuthenticationFailureHandler loginFailureHandler() {

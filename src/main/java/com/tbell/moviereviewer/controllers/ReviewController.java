@@ -24,7 +24,7 @@ public class ReviewController {
     @Autowired
     UserRepository userRepo;
 
-    @RequestMapping(value = "/movie/{movieId}/createReview", method = RequestMethod.POST)
+    @RequestMapping(value = "/movie/{movieId}/createReview/", method = RequestMethod.POST)
     public String createReview(@PathVariable("movieId") long movieId,
                                @RequestParam("message") String message,
                                @RequestParam("movierating")Double movierating,
@@ -34,6 +34,6 @@ public class ReviewController {
         User user = userRepo.findByUsername(username);
         Review newReview = new Review(movierating, message, movie, user);
         reviewRepo.save(newReview);
-        return "redirect:/movie/" + movieId;
+        return "redirect:/movie/" + movieId +'/';
     }
 }
