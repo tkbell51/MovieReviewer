@@ -27,7 +27,7 @@
         <div class="col m6" th:each="review : ${review}">
             <div class="card horizontal hoverable">
                 <div class="card-image">
-                    <a th:href="'/movie/' + @{${review.movie.id}} +'/'" ><img th:src="${review.movie.imgurl}" alt="${review.movie.title}"/></a>
+                    <a th:href="'/movie/' + @{${review.movie.id}} +'/'" ><img th:src="${review.movie.imgurl}" th:alt="${review.movie.title}"/></a>
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">

@@ -16,7 +16,6 @@
         <div class="navbar-wrapper ">
                 <a sec:authorize="!isAuthenticated()" class="brand-logo center" href="/">Movie Review</a>
                 <a sec:authorize="hasRole('ROLE_USER')" class="brand-logo center" href="/movie/">Movie Review</a>
-
         </div>
     </nav>
 
@@ -222,12 +221,12 @@
         <ul sec:authorize="!isAuthenticated()">
             <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Login to enjoy more features!" href="/login"><i class="material-icons">star</i></a></li>
 
-            <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Top of page" href="#title"><i class="material-icons">keyboard_arrow_up</i></a></li>
+            <li><a class="btn-floating amber tooltipped" data-position="left" data-delay="50" data-tooltip="Top of page" href="#title"><i class="material-icons">keyboard_arrow_up</i></a></li>
         </ul>
         <ul sec:authorize="isAuthenticated()">
             <li><a class="btn-floating red tooltipped modal-trigger" data-target="logout" data-position="left" data-delay="50" data-tooltip="Logout"><i class="material-icons">exit_to_app</i></a></li>
-            <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Top of page" href="#title"><i class="material-icons">keyboard_arrow_up</i></a></li>
-            <li><a class="btn-floating red tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Add new movie" data-target="createMovie"><i class="material-icons">add</i></a></li>
+            <li><a class="btn-floating amber tooltipped" data-position="left" data-delay="50" data-tooltip="Top of page" href="#title"><i class="material-icons">keyboard_arrow_up</i></a></li>
+            <li><a class="btn-floating purple tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Add new movie" data-target="createMovie"><i class="material-icons">add</i></a></li>
             <li><a th:href="'/movie/' + @{${user.username}} + '/reviews/' " class="btn-floating orange tooltipped" data-position="left" data-delay="50" data-tooltip="Your Reviews"><i class="material-icons">star</i></a></li>
             <li><a class="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Homepage" href="/movie/"><i class="material-icons">home</i></a></li>
 
